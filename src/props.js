@@ -1,9 +1,26 @@
-import PropTypes from 'prop-types'
+"use strict";
 
-const { string, bool, number, array, oneOfType, shape, object, func, node } = PropTypes
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DEPRECATED_CONFIG_PROPS = exports.defaultProps = exports.propTypes = void 0;
 
-export const propTypes = {
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var string = _propTypes["default"].string,
+    bool = _propTypes["default"].bool,
+    number = _propTypes["default"].number,
+    array = _propTypes["default"].array,
+    oneOfType = _propTypes["default"].oneOfType,
+    shape = _propTypes["default"].shape,
+    object = _propTypes["default"].object,
+    func = _propTypes["default"].func,
+    node = _propTypes["default"].node;
+var propTypes = {
   url: oneOfType([string, array, object]),
+  encKey: oneOfType([string, array, object]),
   playing: bool,
   loop: bool,
   controls: bool,
@@ -18,11 +35,9 @@ export const propTypes = {
   pip: bool,
   light: oneOfType([bool, string]),
   playIcon: node,
-  wrapper: oneOfType([
-    string,
-    func,
-    shape({ render: func.isRequired })
-  ]),
+  wrapper: oneOfType([string, func, shape({
+    render: func.isRequired
+  })]),
   config: shape({
     soundcloud: shape({
       options: object,
@@ -81,9 +96,9 @@ export const propTypes = {
   onProgress: func,
   onEnablePIP: func,
   onDisablePIP: func
-}
-
-export const defaultProps = {
+};
+exports.propTypes = propTypes;
+var defaultProps = {
   playing: false,
   loop: false,
   controls: false,
@@ -101,7 +116,8 @@ export const defaultProps = {
   config: {
     soundcloud: {
       options: {
-        visual: true, // Undocumented, but makes player fill container and look better
+        visual: true,
+        // Undocumented, but makes player fill container and look better
         buying: false,
         liking: false,
         download: false,
@@ -166,27 +182,20 @@ export const defaultProps = {
       playerId: null
     }
   },
-  onReady: function () {},
-  onStart: function () {},
-  onPlay: function () {},
-  onPause: function () {},
-  onBuffer: function () {},
-  onBufferEnd: function () {},
-  onEnded: function () {},
-  onError: function () {},
-  onDuration: function () {},
-  onSeek: function () {},
-  onProgress: function () {},
-  onEnablePIP: function () {},
-  onDisablePIP: function () {}
-}
-
-export const DEPRECATED_CONFIG_PROPS = [
-  'soundcloudConfig',
-  'youtubeConfig',
-  'facebookConfig',
-  'dailymotionConfig',
-  'vimeoConfig',
-  'fileConfig',
-  'wistiaConfig'
-]
+  onReady: function onReady() {},
+  onStart: function onStart() {},
+  onPlay: function onPlay() {},
+  onPause: function onPause() {},
+  onBuffer: function onBuffer() {},
+  onBufferEnd: function onBufferEnd() {},
+  onEnded: function onEnded() {},
+  onError: function onError() {},
+  onDuration: function onDuration() {},
+  onSeek: function onSeek() {},
+  onProgress: function onProgress() {},
+  onEnablePIP: function onEnablePIP() {},
+  onDisablePIP: function onDisablePIP() {}
+};
+exports.defaultProps = defaultProps;
+var DEPRECATED_CONFIG_PROPS = ['soundcloudConfig', 'youtubeConfig', 'facebookConfig', 'dailymotionConfig', 'vimeoConfig', 'fileConfig', 'wistiaConfig'];
+exports.DEPRECATED_CONFIG_PROPS = DEPRECATED_CONFIG_PROPS;
