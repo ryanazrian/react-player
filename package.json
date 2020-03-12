@@ -1,6 +1,6 @@
 {
-  "name": "react-player",
-  "version": "1.15.2",
+  "name": "react-player-pfy",
+  "version": "1.15.9",
   "description": "A React component for playing a variety of URLs, including file paths, YouTube, Facebook, Twitch, SoundCloud, Streamable, Vimeo, Wistia and DailyMotion",
   "main": "lib/ReactPlayer.js",
   "typings": "index.d.ts",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/CookPete/react-player.git"
+    "url": "git+https://github.com/CookPete/react-player.git"
   },
   "keywords": [
     "react",
@@ -156,5 +156,8 @@
       "text",
       "html"
     ]
+  },
+  "directories": {
+    "test": "test"
   }
 }
