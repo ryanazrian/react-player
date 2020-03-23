@@ -497,7 +497,21 @@ var FilePlayer = /*#__PURE__*/function (_Component) {
 
           _this2.dash.initialize(_this2.player, url, _this2.props.playing);
 
-          _this2.dash.setProtectionData(_this2.props.encKey);
+          let keyPlain = _this2.props.encKey;
+
+          const protData = {
+            "org.w3.clearkey": {
+              clearkeys: {}
+            }
+          }
+          const keypair = keyPlain.trim().split(":");
+
+          let kid = hexToBase64(keypair[0]);
+          let key = hexToBase64(keypair[1]);
+          
+          protData["org.w3.clearkey"]["clearkeys"][kid] = key;
+
+          _this2.dash.setProtectionData(protData);
 
           _this2.dash.on('error', _this2.props.onError); // _this2.dash.getDebug().setLogToBrowserConsole(false);
 
