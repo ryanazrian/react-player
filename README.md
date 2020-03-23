@@ -27,14 +27,14 @@
 ### Usage
 
 ```bash
-npm install react-player --save
+npm install react-player-pfy --save
 # or
-yarn add react-player
+yarn add react-player-pfy
 ```
 
 ```js
 import React, { Component } from 'react'
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player-pfy'
 
 class App extends Component {
   render () {
