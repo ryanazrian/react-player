@@ -119,6 +119,46 @@ function _defineProperties(target, props) {
   }
 }
 
+function hexToBase64(hex) {
+  // base64 valid chars
+  const base64 =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+
+  // to bytes
+  let bytes = [];
+  for (var i = 0, len = hex.length; i < len; i += 2) {
+    bytes.push(parseInt(hex.substr(i, 2), 16));
+  }
+  let bytesArr = new Uint8Array(bytes);
+
+  // to bits
+  const bits = [];
+  bytesArr.map(byte => {
+    for (var i = 7; i >= 0; i--) {
+      var bit = byte & (1 << i) ? 1 : 0;
+      bits.push(bit);
+    }
+  });
+
+  // add bits padding => 128 to 132bit
+  bits.push(0);
+  bits.push(0);
+  bits.push(0);
+  bits.push(0);
+
+  let res = "";
+  for (i = 0; i < bits.length; i += 6) {
+    const bin = parseInt(
+      `${bits[i]}${bits[i + 1]}${bits[i + 2]}${bits[i + 3]}${bits[i + 4]}${
+        bits[i + 5]
+      }`,
+      2
+    );
+    res += base64[bin];
+  }
+  return res;
+}
+
 function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
@@ -497,19 +537,9 @@ var FilePlayer = /*#__PURE__*/function (_Component) {
 
           _this2.dash.initialize(_this2.player, url, _this2.props.playing);
 
-          let keyPlain = _this2.props.encKey;
-
           const protData = {
-            "org.w3.clearkey": {
-              clearkeys: {}
-            }
+            "org.w3.clearkey": {}
           }
-          const keypair = keyPlain.trim().split(":");
-
-          let kid = hexToBase64(keypair[0]);
-          let key = hexToBase64(keypair[1]);
-          
-          protData["org.w3.clearkey"]["clearkeys"][kid] = key;
 
           _this2.dash.setProtectionData(protData);
 
